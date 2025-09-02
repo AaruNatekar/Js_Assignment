@@ -40,6 +40,12 @@ let greaterAvg = avg.filter((student) => student.avgScore > 85);
 console.log("Students with average > 85:", greaterAvg);
 
 //Chain map → filter → forEach to print "Topper: <name> (avg: <avg>)".
-console.log(avg.forEach(student => {
+students.map(student => {
+    let totalScore = student.scores.reduce((sum, score) => sum + score, 0);
+    let avgScore = totalScore / student.scores.length;
+    return { ...student, avgScore };
+  })
+  .filter(student => student.avgScore > 85)
+  .forEach(student => {
     console.log(`Topper: ${student.name} (avg: ${student.avgScore})`);
-  }));
+  });
